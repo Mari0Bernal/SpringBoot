@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +21,8 @@ import com.microservice.celulares.service.CelularService;
 
 @RestController
 public class CelularController {
-
+	@Autowired
+	private Environment env;
 	@Autowired
 	private CelularService service;
 	
@@ -31,7 +33,7 @@ public class CelularController {
 	public List<Celular> list() {
 		//return service.findAll();
 		return service.findAll().stream().map(cel -> {
-			cel.setPort(port);
+			cel.setPort(Integer.parseInt(env.getProperty("local.server.port")));
 			return cel;
 		}).collect(Collectors.toList());
 	}
@@ -41,11 +43,11 @@ public class CelularController {
 		//boolean bl = false;
 		//if(!bl)
 		//	throw new RuntimeException("No se pudo obtener el detalle del celular");
-		try {
-			Thread.sleep(2000L);
-		}catch(InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(2000L);
+//		}catch(InterruptedException e) {
+//			e.printStackTrace();
+//		}
 		return service.findById(id);
 	}
 	

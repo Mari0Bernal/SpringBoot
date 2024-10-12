@@ -17,17 +17,17 @@ public class StoreController {
 
 	@Autowired
 	//@Qualifier("serviceRest")
-	private StoreService storeService;
+	private StoreService StoreService;
 
 	@GetMapping("/list")
 	public List<Store> list(){
-		return storeService.findAll();
+		return StoreService.findAll();
 	}
 	
 	@HystrixCommand(fallbackMethod="metodoGenerico")
 	@GetMapping("/celular/{id}/cantidad/{cantidad}")
 	public Store details(@PathVariable Long id, @PathVariable Integer cantidad) {
-		return storeService.findById(id, cantidad);
+		return StoreService.findById(id, cantidad);
 	}
 	
 	public Store metodoGenerico(Long id, Integer cantidad) {

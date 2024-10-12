@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.microservice.store.client.CelularClientFeign;
 import com.microservice.store.models.Store;
 
 @Service("serviceFeign")
+@Primary
 public class StoreServiceFeignImpl implements StoreService {
 
 	@Autowired

@@ -1,4 +1,4 @@
-package com.microservice.usuarios.entity;
+package com.microservice.commons.users.entity;
 
 import java.io.Serializable;
 import java.util.List;
@@ -102,5 +102,13 @@ public class Usuario implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+	
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 }
